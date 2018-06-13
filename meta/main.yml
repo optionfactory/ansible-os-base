@@ -1,0 +1,15 @@
+galaxy_info:
+  author: optionfactory
+  description: safe defaults (ca-certs, network tools, ntp client)
+  company: optionfactory
+  license: BSD
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: SLES
+    versions:
+    - 12SP3    
+  galaxy_tags: []
+dependencies: []

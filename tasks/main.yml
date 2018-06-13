@@ -1,0 +1,40 @@
+---
+- name: install ca-certificates package and network tools (debian)
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+    - curl
+    - ntp
+    - rsync
+  when: ansible_os_family == 'Debian'
+- name: install ca-certificates package and network tools (suse)
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - ca-certificates
+    - curl
+    - ntp
+    - rsync
+  when: ansible_os_family == 'Suse'
+
+- name: disable requiretty
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: 'Defaults.*requiretty'
+    state: absent
+- name: ensure ntp is started
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+- name: fix screen profile
+  lineinfile:
+    dest: /etc/screenrc
+    line: 'shell -/bin/bash'
