@@ -13,7 +13,7 @@
     - rsync
   when: ansible_os_family == 'Debian'
 - name: install ca-certificates package and network tools (suse)
-  apt:
+  zypper:
     name: "{{ item }}"
     state: present
     update_cache: yes
@@ -23,7 +23,6 @@
     - ntp
     - rsync
   when: ansible_os_family == 'Suse'
-
 - name: disable requiretty
   lineinfile:
     dest: /etc/sudoers
