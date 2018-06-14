@@ -28,9 +28,16 @@
     dest: /etc/sudoers
     regexp: 'Defaults.*requiretty'
     state: absent
-- name: ensure ntp is started
+- name: ensure ntp is started (Debian)
+  when: ansible_os_family == 'Debian'
   service:
     name: ntp
+    state: started
+    enabled: yes
+- name: ensure ntp is started (Suse)
+  when: ansible_os_family == 'Suse'
+  service:
+    name: ntpd
     state: started
     enabled: yes
 - name: fix screen profile
