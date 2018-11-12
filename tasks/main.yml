@@ -2,27 +2,25 @@
 - name: install ca-certificates package and network tools (debian)
   when: ansible_os_family == 'Debian'
   apt:
-    name: "{{ item }}"
+    name:
+     - apt-transport-https
+     - ca-certificates
+     - software-properties-common
+     - curl
+     - ntp
+     - rsync
     state: present
     update_cache: yes
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-    - software-properties-common
-    - curl
-    - ntp
-    - rsync
 - name: install ca-certificates package and network tools (suse)
   when: ansible_os_family == 'Suse'
   zypper:
-    name: "{{ item }}"
+    name:
+     - ca-certificates
+     - curl
+     - ntp
+     - rsync
     state: present
     update_cache: yes
-  with_items:
-    - ca-certificates
-    - curl
-    - ntp
-    - rsync
 - name: disable requiretty
   lineinfile:
     dest: /etc/sudoers
